@@ -17,7 +17,7 @@ export const CarouselBlogEntries = ({
 }) => {
   return (
     <Carousel
-      className="w-full max-w-xl flex items-center cursor-pointer"
+      className="w-full max-w-xl flex items-center cursor-pointer outline-none ring-none border-none"
       plugins={[
         Autoplay({
           delay: 4000,
@@ -26,11 +26,11 @@ export const CarouselBlogEntries = ({
     >
       <CarouselContent>
         {blogEntries.map((blog, index) => (
-          <CarouselItem key={index}>
+          <CarouselItem key={index} className="outline-none ring-none">
             <div className="p-1">
-              <Card className="border-none">
+              <Card className="border-none outline-none ring-none">
                 <Link href={"blog/" + blog.id}>
-                  <CardContent className="flex aspect-square items-center justify-center p-6 bg-black text-white outline-none border-none">
+                  <CardContent className="flex aspect-square items-center justify-center p-6 bg-zinc-900 text-white outline-none border-none">
                     <span className="text-4xl font-semibold">{blog.title}</span>
                   </CardContent>
                 </Link>

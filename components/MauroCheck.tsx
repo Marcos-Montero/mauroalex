@@ -1,13 +1,9 @@
 "use client";
 import { useSession } from "next-auth/react";
 
-import MauroLanding from "./MauroLanding";
+import { whitelist } from "@/lib/consts";
 
-const whitelist = [
-  process.env.NEXT_PUBLIC_MAURO_MAIL,
-  process.env.NEXT_PUBLIC_MAURO_MAIL_2,
-  process.env.NEXT_PUBLIC_ADMIN_MAIL,
-];
+import MauroLanding from "./MauroLanding";
 
 export default function MauroCheck({
   children,
@@ -20,7 +16,7 @@ export default function MauroCheck({
   if (!session?.user?.email) {
     return;
   }
-  if (whitelist.includes(session?.user?.email)) {
+  if (whitelist.admin.has(session?.user?.email)) {
     return <>{children}</>;
   } else if (noLanding) {
     return <></>;

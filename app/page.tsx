@@ -1,6 +1,7 @@
 import { Suspense } from "react";
 
 import { CarouselBlogEntries } from "./components/carousel";
+import { ErrorModal } from "./components/error-modal";
 import { PubliWrapper } from "./components/publi";
 import { SidebarMenu } from "./components/sidebar-menu";
 import { getBlogEntries } from "./data";
@@ -8,14 +9,13 @@ import { getBlogEntries } from "./data";
 export default async function BlogPage({
   searchParams,
 }: {
-  searchParams: { sb?: string };
+  searchParams: { sb?: string; errror?: string };
 }) {
   const blogEntries = await getBlogEntries();
-  const isOpen = !!searchParams.sb;
-
   return (
     <div className="flex h-full">
-      <div className="flex  bg-zinc-800">
+      <ErrorModal />
+      <div className="flex  bg-zinc-950">
         <SidebarMenu blogEntries={blogEntries} />
         <PubliWrapper>
           <Suspense fallback={<h1>...loading blog entries</h1>}>
