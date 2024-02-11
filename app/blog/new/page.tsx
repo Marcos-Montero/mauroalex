@@ -8,7 +8,7 @@ import { whitelist } from "@/lib/consts";
 
 import { BlogEditor } from "./components/blog-editor";
 import { PromptMenu } from "./components/prompt-menu";
-import { getBlogEntries, getUserPrompts } from "./data";
+import { getBlogEntries, getUserIdByEmail, getUserPrompts } from "./data";
 
 export default async function PublishPage() {
   const session = await auth();
@@ -22,6 +22,8 @@ export default async function PublishPage() {
     redirect("/api/auth/signin");
   }
   const isAdmin = whitelist.admin.has(session?.user?.email);
+  const userId = await getUserIdByEmail(session?.user?.email);
+
   if (!isAdmin) redirect("/?error=unauthorized");
 
   return (
@@ -34,6 +36,7 @@ export default async function PublishPage() {
           <PromptMenu
             availablePrompts={userPrompts}
             selectedPrompt={selectedPrompt}
+            userId={userId}
           />
         </Suspense>
         <div className="flex flex-col gap-4 w-full">

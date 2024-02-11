@@ -13,3 +13,10 @@ export const getUserPrompts = async () => {
 
   return users;
 };
+export const getUserIdByEmail = async (email: string) => {
+  unstable_noStore();
+  const user = await prisma.user.findFirst({
+    where: { email },
+  });
+  return user?.id;
+};

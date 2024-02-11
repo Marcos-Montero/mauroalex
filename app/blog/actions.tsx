@@ -1,6 +1,5 @@
 "use server";
 
-import { getSession } from "next-auth/react";
 import { revalidatePath } from "next/cache";
 
 import { prisma } from "@/lib/prisma";
@@ -36,27 +35,28 @@ export const selectPrompt = async (formData: FormData) => {
 
   return response;
 };
-export const createPrompt = async (formData: FormData) => {
-  const session = await getSession();
-  const userId = session?.user?.id;
-  const prompt = formData.get("prompt") as string;
-  if (!prompt || !userId) return;
+export const createPrompt = async ({
+  prompt,
+  id,
+}: {
+  prompt: string;
+  id: string;
+}) => {
+  if (!prompt || !id) return;
   const response = await prisma.userPrompts.create({
     data: {
       prompt,
       selected: false,
-      userId,
+      userId: id,
     },
   });
   revalidatePath("/blog/new");
   return response;
 };
-export const deletePrompt = async (formData: FormData) => {
-  const promptId = formData.get("promptId") as string;
-  console.log({ promptId });
-  if (!promptId) return;
+export const deletePrompt = async (id: string) => {
+  if (!id) return;
   const response = await prisma.userPrompts.delete({
-    where: { id: promptId },
+    where: { id },
   });
   revalidatePath("/blog/new");
   return response;
