@@ -1,13 +1,18 @@
+"use client";
 import { PropsWithChildren } from "react";
 
+import { useSearchParams } from "next/navigation";
+
 export const PubliWrapper = ({ children }: PropsWithChildren) => {
+  const searchParams = useSearchParams();
+  const isOpen = searchParams.get("sb") === "1";
   return (
-    <div className="flex flex-col w-screen h-full">
+    <div className="flex flex-col w-full h-full">
       <PubliTop />
-      <div className="flex h-full w-screen m-0">
-        <PubliLeft />
+      <div className="flex h-full w-full m-0">
+        {!isOpen && <PubliLeft />}
         {children}
-        <PubliRight />
+        {!isOpen && <PubliRight />}
       </div>
       <PubliBottom />
     </div>

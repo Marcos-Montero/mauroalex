@@ -8,8 +8,8 @@ import { Nav } from "./components/nav";
 import { Victor_Mono } from "./fonts";
 
 export const metadata: Metadata = {
-  title: "Hanma Club",
-  description: "Club for Hanma blooded people",
+  title: "Mauro Alex",
+  description: "Blog de calistenia de Mauro Alex",
 };
 
 export default function RootLayout({

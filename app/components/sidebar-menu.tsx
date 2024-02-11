@@ -1,9 +1,17 @@
 "use client";
+import { useTransition } from "react";
+
 import { AnimatePresence, motion } from "framer-motion";
+import { TrashIcon } from "lucide-react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
+import { useToggle } from "react-use";
 
+import Button from "@/components/buttons";
 import { BlogEntry } from "@prisma/client";
+
+import { deleteArticle } from "../actions";
+import { ConfirmationModal } from "./confirmation-modal";
 
 const variants = {
   open: {
@@ -19,9 +27,16 @@ const variants = {
     transition: { type: "spring", duration: 0.5, staggerChildren: 0.1 },
   },
 };
-export const SidebarMenu = ({ blogEntries }: { blogEntries: BlogEntry[] }) => {
+export const SidebarMenu = ({
+  blogEntries,
+  isAdmin,
+}: {
+  blogEntries: BlogEntry[];
+  isAdmin?: boolean;
+}) => {
   const searchParams = useSearchParams();
   const isOpen = searchParams.get("sb") === "1";
+
   return (
     <AnimatePresence>
       {isOpen && (
@@ -44,8 +59,10 @@ export const SidebarMenu = ({ blogEntries }: { blogEntries: BlogEntry[] }) => {
               {blogEntries?.map((entry) => (
                 <SidebarMenuLi
                   key={entry.id}
+                  entryId={entry.id}
                   label={entry.title}
                   link={`/blog/${entry.id}`}
+                  isAdmin={isAdmin}
                 />
               ))}
             </ul>
@@ -55,10 +72,44 @@ export const SidebarMenu = ({ blogEntries }: { blogEntries: BlogEntry[] }) => {
     </AnimatePresence>
   );
 };
-const SidebarMenuLi = ({ label, link }: { label: string; link: string }) => {
+const SidebarMenuLi = ({
+  entryId,
+  label,
+  link,
+  isAdmin,
+}: {
+  entryId: string;
+  label: string;
+  link: string;
+  isAdmin?: boolean;
+}) => {
+  const [isPending, startTrasition] = useTransition();
+  const [isOpen, toggleOpen] = useToggle(false);
+  const handleDelete = (articleId: string) =>
+    startTrasition(async () => {
+      try {
+        await deleteArticle(articleId);
+      } catch (error) {
+        console.error({ error });
+      }
+    });
+
   return (
-    <li className="w-64 overflow-hidden text-ellipsis underline whitespace-nowrap">
-      <Link href={link}>{label}</Link>
-    </li>
+    <>
+      <ConfirmationModal
+        isOpen={isOpen}
+        cancel={toggleOpen}
+        question="Are you sure you want to delete this article?"
+        action={() => handleDelete(entryId)}
+      />
+      <li className="w-64 overflow-hidden text-ellipsis underline whitespace-nowrap flex gap-2 items-center">
+        {isAdmin && (
+          <Button variant="ghost" className="p-0" onClick={toggleOpen}>
+            <TrashIcon className="w-4 h-4 text-red-600" />
+          </Button>
+        )}
+        <Link href={link}>{label}</Link>
+      </li>
+    </>
   );
 };

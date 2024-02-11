@@ -17,7 +17,7 @@ export const CarouselBlogEntries = ({
 }) => {
   return (
     <Carousel
-      className="w-full flex items-center cursor-pointer outline-none ring-none border-none max-w-[50%]"
+      className="w-full flex items-center cursor-pointer outline-none ring-none border-none  max-w-full lg:max-w-[50%] max-h-64 overflow-hidden"
       plugins={[
         Autoplay({
           delay: 4000,

@@ -62,9 +62,11 @@ export const ReadOnlyBlog = ({
     ],
   });
   return (
-    <EditorContent
-      editor={htmlContent}
-      className="h-64 w-full text-white px-8"
-    />
+    <>
+      <EditorContent
+        editor={htmlContent}
+        className="h-64 w-full text-white px-8"
+      />
+    </>
   );
 };
