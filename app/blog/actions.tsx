@@ -5,10 +5,13 @@ import { revalidatePath } from "next/cache";
 
 import { prisma } from "@/lib/prisma";
 
-export const createBlog = async (formData: FormData) => {
-  const title = formData.get("title") as string;
-  const content = formData.get("content") as string;
-  console.log({ title, content });
+export const createBlog = async ({
+  title,
+  content,
+}: {
+  title?: string;
+  content?: string;
+}) => {
   if (!title || !content) return;
   const response = await prisma.blogEntry.create({
     data: {

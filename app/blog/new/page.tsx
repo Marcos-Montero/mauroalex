@@ -21,16 +21,15 @@ export default async function PublishPage() {
   if (!session || !session?.user?.email) {
     redirect("/api/auth/signin");
   }
-  if (!whitelist.admin.has(session?.user?.email))
-    redirect("/?error=unauthorized");
+  const isAdmin = whitelist.admin.has(session?.user?.email);
+  if (!isAdmin) redirect("/?error=unauthorized");
 
   return (
-    <div className="flex  bg-zinc-800 h-full">
+    <div className="flex  bg-zinc-800 h-full overflow-y-scroll">
       <Suspense>
-        <SidebarMenu blogEntries={blogEntries} />
+        <SidebarMenu blogEntries={blogEntries} isAdmin={isAdmin} />
       </Suspense>
       <div className="flex flex-col gap-4 items-center  w-full p-8 ">
-        <h1 className="text-3xl italic px-4 pl-2 py-2 self-start">New post</h1>
         <Suspense fallback={<h1>...loading prompts</h1>}>
           <PromptMenu
             availablePrompts={userPrompts}
@@ -39,7 +38,7 @@ export default async function PublishPage() {
         </Suspense>
         <div className="flex flex-col gap-4 w-full">
           <Suspense>
-            <BlogEditor selectedPrompt={selectedPrompt} />
+            <BlogEditor />
           </Suspense>
         </div>
       </div>

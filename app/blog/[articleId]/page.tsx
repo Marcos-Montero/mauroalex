@@ -2,6 +2,8 @@ import { Suspense } from "react";
 
 import { PubliWrapper } from "@/app/components/publi";
 import { SidebarMenu } from "@/app/components/sidebar-menu";
+import { auth } from "@/lib/auth";
+import { whitelist } from "@/lib/consts";
 
 import { ReadOnlyBlog } from "./components/read-only-blog";
 import { getArticleById, getBlogEntries } from "./data";
@@ -13,10 +15,12 @@ const ArticlePage = async ({
 }) => {
   const blogEntry = await getArticleById(articleId);
   const blogEntries = await getBlogEntries();
+  const session = await auth();
+  const isAdmin = whitelist.admin.has(session?.user?.email || undefined);
 
   return (
     <div className="flex  bg-zinc-800 h-full">
-      <SidebarMenu blogEntries={blogEntries} />
+      <SidebarMenu blogEntries={blogEntries} isAdmin={isAdmin} />
       <PubliWrapper>
         <article className="lg:w-[50%] flex overflow-hidden overflow-y-scroll flex-col items-center h-full shadow-2xl bg-white/10">
           <Suspense fallback={<h1>...loading blog entry</h1>}>
