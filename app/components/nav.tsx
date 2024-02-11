@@ -34,14 +34,16 @@ export const Nav = () => {
         <div className="flex w-screen bg-black/50 px-8 border-b border-white/10  items-center py-2">
           <div className="flex gap-4">
             <div className="relative">
-              <div className="flex justify-center items-center rounded-full overflow-hidden h-8 w-8 border-2 border-white hover:scale-110 duration-300">
-                <Image
-                  src="/logo-ma.jpeg"
-                  alt="logo-mauro-blog"
-                  width={50}
-                  height={50}
-                />
-              </div>
+              <Link href="/">
+                <div className="flex justify-center items-center rounded-full overflow-hidden h-8 w-8 border-2 border-white hover:scale-110 duration-300">
+                  <Image
+                    src="/logo-ma.jpeg"
+                    alt="logo-mauro-blog"
+                    width={50}
+                    height={50}
+                  />
+                </div>
+              </Link>
             </div>
             <button onClick={handleOpen}>
               <MenuIcon
