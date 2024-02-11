@@ -1,4 +1,4 @@
-import { getServerSession } from "next-auth";
+import { getSession } from "next-auth/react";
 import { NextResponse } from "next/server";
 
 import { prisma } from "@/lib/prisma";
@@ -10,7 +10,7 @@ export const GET = async (request: Request) => {
 export const POST = async (req: Request) => {
   const data = await req.json();
   const { measures, rankingId } = data;
-  const session = await getServerSession();
+  const session = await getSession();
   const user = await prisma.user.findUnique({
     where: {
       email: session?.user?.email!,

@@ -1,23 +1,23 @@
-import { TrophyIcon } from 'lucide-react';
-import { getServerSession } from 'next-auth';
-import Link from 'next/link';
+import { TrophyIcon } from "lucide-react";
+import { getSession } from "next-auth/react";
+import Link from "next/link";
 
-import Landing from '@/app/the-club/landing';
-import { AuthCheckRedirect } from '@/components/AuthCheck';
-import MauroCheck from '@/components/MauroCheck';
+import Landing from "@/app/the-club/landing";
+import { AuthCheckRedirect } from "@/components/AuthCheck";
+import MauroCheck from "@/components/MauroCheck";
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from '@/components/ui/tooltip';
-import { prisma } from '@/lib/prisma';
+} from "@/components/ui/tooltip";
+import { prisma } from "@/lib/prisma";
 
-import TriggerAddTrophypanel from './add-trophies-panel';
-import { TriggerDeleteRankingDialog } from './delete-trophy-dialog';
+import TriggerAddTrophypanel from "./add-trophies-panel";
+import { TriggerDeleteRankingDialog } from "./delete-trophy-dialog";
 
 export default async function Trophies() {
-  const session = await getServerSession();
+  const session = await getSession();
   if (!session) {
     return <Landing />;
   }

@@ -1,13 +1,13 @@
-import { getServerSession } from 'next-auth';
+import { getSession } from "next-auth/react";
 
-import { AuthCheckRedirect } from '@/components/AuthCheck';
-import { prisma } from '@/lib/prisma';
+import { AuthCheckRedirect } from "@/components/AuthCheck";
+import { prisma } from "@/lib/prisma";
 
-import RecordsCard from '../(dashboard)/records-card';
-import WorkoutCard from './workout-card';
+import RecordsCard from "../(dashboard)/records-card";
+import WorkoutCard from "./workout-card";
 
 const WorkoutPage = async () => {
-  const session = await getServerSession();
+  const session = await getSession();
   if (!session) {
     return (
       <AuthCheckRedirect>

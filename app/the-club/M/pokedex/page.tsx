@@ -1,18 +1,18 @@
-import { getServerSession } from 'next-auth';
+import { getSession } from "next-auth/react";
 
-import Landing from '@/app/the-club/landing';
-import { AuthCheckRedirect } from '@/components/AuthCheck';
-import MauroCheck from '@/components/MauroCheck';
-import { prisma } from '@/lib/prisma';
+import Landing from "@/app/the-club/landing";
+import { AuthCheckRedirect } from "@/components/AuthCheck";
+import MauroCheck from "@/components/MauroCheck";
+import { prisma } from "@/lib/prisma";
 import {
   Challenge,
   ChallengeSet,
   Exercise,
   User,
   Workout,
-} from '@prisma/client';
+} from "@prisma/client";
 
-import { PokemonList } from './pokemon-list';
+import { PokemonList } from "./pokemon-list";
 
 export const dynamic = "force-dynamic";
 export type UserWithExercisesChallenges = User & {
@@ -30,7 +30,7 @@ export type UserWithExercisesChallenges = User & {
 };
 
 export default async function Pokedex() {
-  const session = getServerSession();
+  const session = getSession();
   if (!session) {
     return <Landing />;
   }

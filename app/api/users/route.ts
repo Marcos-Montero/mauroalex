@@ -1,4 +1,4 @@
-import { getServerSession } from "next-auth";
+import { getSession } from "next-auth/react";
 import { NextResponse } from "next/server";
 
 import { prisma } from "@/lib/prisma";
@@ -9,7 +9,7 @@ export async function GET(request: Request) {
 }
 
 export async function PUT(req: Request) {
-  const session = await getServerSession();
+  const session = await getSession();
   const currentUserEmail = session?.user?.email!;
   const data = await req.json();
   const record = await prisma.user.update({

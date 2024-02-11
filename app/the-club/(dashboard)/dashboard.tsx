@@ -1,4 +1,4 @@
-import { LogOutButton } from "@/components/buttons";
+import { LogButton } from "@/components/buttons";
 import { getUserWithRecords } from "@/lib/utils";
 import { BasicExercise, Record as RecordType, User } from "@prisma/client";
 
@@ -22,7 +22,7 @@ const Dashboard = async () => {
       </div>
       <Medalscard userWithDetails={userWithDetails} />
 
-      <LogOutButton />
+      <LogButton />
     </main>
   );
 };

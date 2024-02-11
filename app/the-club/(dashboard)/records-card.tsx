@@ -1,4 +1,4 @@
-import { getServerSession } from "next-auth";
+import { getSession } from "next-auth/react";
 
 import { prisma } from "@/lib/prisma";
 import { getDurationString } from "@/lib/utils";
@@ -18,7 +18,7 @@ export type RankingEntriesWithRankingAndValues = (RankingEntry & {
   values: RankingEntryValue[];
 })[];
 const RecordsCard = async () => {
-  const session = await getServerSession();
+  const session = await getSession();
   const userRankingEntries = await prisma.rankingEntry.findMany({
     where: {
       user: {

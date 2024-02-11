@@ -1,7 +1,7 @@
 import React from "react";
 
 import { Bg } from "@/components/bg";
-import { SignInButton } from "@/components/buttons";
+import { LogButton } from "@/components/buttons";
 
 const Landing = () => {
   return (
@@ -12,7 +12,7 @@ const Landing = () => {
           Welcome to{" "}
         </h1>
         <div className="h-[50%] items-center bg-red flex justify-center w-full z-[2]">
-          <SignInButton className="bg-gradient-to-tr from-red-500 to-red-700 hover:to-red-600" />
+          <LogButton className="bg-gradient-to-tr from-red-500 to-red-700 hover:to-red-600" />
         </div>
       </main>
     </>

@@ -1,29 +1,26 @@
-import { Suspense } from 'react';
+import { Suspense } from "react";
 
-import { getServerSession } from 'next-auth';
+import { getSession } from "next-auth/react";
 
-import { AuthCheckRedirect } from '@/components/AuthCheck';
-import { BasicChartCard } from '@/components/basic-charts/basic-chart-card';
-import MauroCheck from '@/components/MauroCheck';
-import Spinner from '@/components/spinner';
-import UserCheck from '@/components/UserCheck';
-import { prisma } from '@/lib/prisma';
-import {
-  getUser,
-  getUserWithRecords,
-} from '@/lib/utils';
+import { AuthCheckRedirect } from "@/components/AuthCheck";
+import { BasicChartCard } from "@/components/basic-charts/basic-chart-card";
+import MauroCheck from "@/components/MauroCheck";
+import Spinner from "@/components/spinner";
+import UserCheck from "@/components/UserCheck";
+import { prisma } from "@/lib/prisma";
+import { getUser, getUserWithRecords } from "@/lib/utils";
 import {
   Measure,
   Ranking,
   RankingEntry,
   RankingEntryValue,
   User,
-} from '@prisma/client';
+} from "@prisma/client";
 
-import Landing from '../landing';
-import TriggerAddRankingpanel from './add-ranking-panel';
-import TriggerEditUserEntryPanel from './edit-user-entry';
-import { RankingTable } from './ranking-table';
+import Landing from "../landing";
+import TriggerAddRankingpanel from "./add-ranking-panel";
+import TriggerEditUserEntryPanel from "./edit-user-entry";
+import { RankingTable } from "./ranking-table";
 
 export type RankingWithDetails = Ranking & {
   measures: Measure[];
@@ -34,7 +31,7 @@ export type RankingWithDetails = Ranking & {
 };
 
 const Rankings = async () => {
-  const session = await getServerSession();
+  const session = await getSession();
   if (!session) {
     return <Landing />;
   }

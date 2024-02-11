@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 import {
   BookUserIcon,
@@ -6,13 +6,13 @@ import {
   LucideIcon,
   TrophyIcon,
   UserIcon,
-} from 'lucide-react';
-import Link from 'next/link';
+} from "lucide-react";
+import Link from "next/link";
 
-import { LogOutButton } from './buttons';
-import HanmaIconNoBg from './hanma-icon-nobg';
-import MauroCheck from './MauroCheck';
-import UserCheck from './UserCheck';
+import { LogButton } from "./buttons";
+import HanmaIconNoBg from "./hanma-icon-nobg";
+import MauroCheck from "./MauroCheck";
+import UserCheck from "./UserCheck";
 
 export const NavMenu = () => {
   return (
@@ -41,7 +41,7 @@ export const NavMenu = () => {
           Trophies
         </MenuLink>
       </MauroCheck>
-      <LogOutButton className="sm:hidden" variant="ghost" />
+      <LogButton className="sm:hidden" variant="ghost" />
     </ul>
   );
 };

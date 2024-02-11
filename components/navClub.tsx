@@ -1,12 +1,12 @@
 "use client";
-import { useSession } from 'next-auth/react';
-import Image from 'next/image';
+import { useSession } from "next-auth/react";
+import Image from "next/image";
 
-import { defaultUserAvatar } from '@/consts';
+import { defaultUserAvatar } from "@/consts";
 
-import { AuthCheck } from './AuthCheck';
-import { LogOutButton } from './buttons';
-import { NavMenu } from './nav-menu';
+import { AuthCheck } from "./AuthCheck";
+import { LogButton } from "./buttons";
+import { NavMenu } from "./nav-menu";
 
 export const NavClub = () => {
   const { data } = useSession();
@@ -21,7 +21,7 @@ export const NavClub = () => {
           className={`rounded-full hidden sm:block`}
         ></Image>
         <NavMenu />
-        <LogOutButton variant="ghost" className="hidden sm:flex" />
+        <LogButton variant="ghost" className="hidden sm:flex" />
       </nav>
     </AuthCheck>
   );

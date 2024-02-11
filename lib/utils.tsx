@@ -1,12 +1,12 @@
-import {
-  type ClassValue,
-  clsx,
-} from 'clsx';
-import { twMerge } from 'tailwind-merge';
+import { type ClassValue, clsx } from "clsx";
+import { getSession } from "next-auth/react";
+import { twMerge } from "tailwind-merge";
 
 /* 
 import { PrismaAdapter } from "@next-auth/prisma-adapter"; */
-import { User } from '@prisma/client';
+import { User } from "@prisma/client";
+
+import { prisma } from "./prisma";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -84,8 +84,8 @@ export const timeSince = (date: Date) => {
   return `${Math.floor(seconds)} s ago`;
 };
 
-/* export const getUser = async () => {
-  const session = await getServerSession();
+export const getUser = async () => {
+  const session = await getSession();
   if (!session?.user?.email) return;
   const user = await prisma.user.findUnique({
     where: {
@@ -95,7 +95,7 @@ export const timeSince = (date: Date) => {
   return user;
 };
 export const getUserWithRecords = async (id?: string) => {
-  const session = await getServerSession();
+  const session = await getSession();
   if (!session?.user?.email) return;
 
   const whereObject = id
@@ -113,10 +113,10 @@ export const getUserWithRecords = async (id?: string) => {
         },
       },
     },
-  }); 
+  });
   if (!user) return;
   return user;
-};*/
+};
 export const getDurationString = (duration?: number) => {
   if (!duration) return;
   const hours = Math.floor(duration / 3600);
