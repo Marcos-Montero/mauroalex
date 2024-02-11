@@ -1,8 +1,4 @@
-import { getBlogEntries } from "../data";
-
 const ClubPage = async () => {
-  const blogEntries = await getBlogEntries();
-
   return (
     <div className="flex flex-col bg-zinc-800 h-full w-full">
       <div className="flex justify-center items-center w-screen h-full flex-col gap-4">

@@ -26,7 +26,9 @@ export default async function PublishPage() {
 
   return (
     <div className="flex  bg-zinc-800 h-full">
-      <SidebarMenu blogEntries={blogEntries} />
+      <Suspense>
+        <SidebarMenu blogEntries={blogEntries} />
+      </Suspense>
       <div className="flex flex-col gap-4 items-center  w-full p-8 ">
         <h1 className="text-3xl italic px-4 pl-2 py-2 self-start">New post</h1>
         <Suspense fallback={<h1>...loading prompts</h1>}>
@@ -36,7 +38,9 @@ export default async function PublishPage() {
           />
         </Suspense>
         <div className="flex flex-col gap-4 w-full">
-          <BlogEditor selectedPrompt={selectedPrompt} />
+          <Suspense>
+            <BlogEditor selectedPrompt={selectedPrompt} />
+          </Suspense>
         </div>
       </div>
     </div>

@@ -14,9 +14,13 @@ export default async function BlogPage({
   const blogEntries = await getBlogEntries();
   return (
     <div className="flex h-full">
-      <ErrorModal />
+      <Suspense>
+        <ErrorModal />
+      </Suspense>
       <div className="flex  bg-zinc-950">
-        <SidebarMenu blogEntries={blogEntries} />
+        <Suspense>
+          <SidebarMenu blogEntries={blogEntries} />
+        </Suspense>
         <PubliWrapper>
           <Suspense fallback={<h1>...loading blog entries</h1>}>
             <CarouselBlogEntries blogEntries={blogEntries} />

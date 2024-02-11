@@ -1,9 +1,11 @@
-import './globals.css';
+import "./globals.css";
 
-import type { Metadata } from 'next';
+import { Suspense } from "react";
 
-import { Nav } from './components/nav';
-import { Victor_Mono } from './fonts';
+import type { Metadata } from "next";
+
+import { Nav } from "./components/nav";
+import { Victor_Mono } from "./fonts";
 
 export const metadata: Metadata = {
   title: "Hanma Club",
@@ -18,7 +20,9 @@ export default function RootLayout({
   return (
     <html lang="en" className={Victor_Mono.className}>
       <body className="fle flex-col overflow-hidden">
-        <Nav />
+        <Suspense>
+          <Nav />
+        </Suspense>
         {children}
       </body>
     </html>
