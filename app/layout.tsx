@@ -1,11 +1,11 @@
-import "./globals.css";
+import './globals.css';
 
-import { Suspense } from "react";
+import { Suspense } from 'react';
 
-import type { Metadata } from "next";
+import type { Metadata } from 'next';
 
-import { Nav } from "./components/nav";
-import { Victor_Mono } from "./fonts";
+import { Nav } from './components/nav';
+import { Victor_Mono } from './fonts';
 
 export const metadata: Metadata = {
   title: "Mauro Alex",
@@ -25,6 +25,11 @@ export default function RootLayout({
         </Suspense>
         {children}
       </body>
+      <script
+        async
+        src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${process.env.NEXT_PUBLIC_GOOGLE_ADS_CLIENT_ID}`}
+        crossOrigin="anonymous"
+      />
     </html>
   );
 }
