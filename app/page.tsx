@@ -1,19 +1,15 @@
-import { Suspense } from "react";
+import { Suspense } from 'react';
 
-import { auth } from "@/lib/auth";
-import { whitelist } from "@/lib/consts";
+import { auth } from '@/lib/auth';
+import { whitelist } from '@/lib/consts';
 
-import { CarouselBlogEntries } from "./components/carousel";
-import { ErrorModal } from "./components/error-modal";
-import { PubliWrapper } from "./components/publi";
-import { SidebarMenu } from "./components/sidebar-menu";
-import { getBlogEntries } from "./data";
+import { CarouselBlogEntries } from './components/carousel';
+import { ErrorModal } from './components/error-modal';
+import { PubliWrapper } from './components/publi';
+import { SidebarMenu } from './components/sidebar-menu';
+import { getBlogEntries } from './data';
 
-export default async function BlogPage({
-  searchParams,
-}: {
-  searchParams: { sb?: string; errror?: string };
-}) {
+export default async function BlogPage() {
   const blogEntries = await getBlogEntries();
   const session = await auth();
   const isAdmin = whitelist.admin.has(session?.user?.email || undefined);

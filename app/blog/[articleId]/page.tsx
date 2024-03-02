@@ -19,10 +19,10 @@ const ArticlePage = async ({
   const isAdmin = whitelist.admin.has(session?.user?.email || undefined);
 
   return (
-    <div className="flex  bg-zinc-800 h-full">
+    <div className="flex  bg-zinc-800 fh-full">
       <SidebarMenu blogEntries={blogEntries} isAdmin={isAdmin} />
       <PubliWrapper>
-        <article className="lg:w-[50%] flex overflow-hidden overflow-y-scroll flex-col items-center h-full shadow-2xl bg-white/10">
+        <article className=" flex overflow-hidden overflow-y-scroll flex-col items-center h-full flex-1 ">
           <Suspense fallback={<h1>...loading blog entry</h1>}>
             {blogEntry && <ReadOnlyBlog content={blogEntry} />}
           </Suspense>

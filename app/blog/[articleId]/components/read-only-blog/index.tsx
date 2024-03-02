@@ -65,7 +65,7 @@ export const ReadOnlyBlog = ({
     <>
       <EditorContent
         editor={htmlContent}
-        className="h-64 w-full text-white px-8"
+        className="h-64 w-full text-white px-8 "
       />
     </>
   );

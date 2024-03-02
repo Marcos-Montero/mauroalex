@@ -8,6 +8,11 @@ import { useSearchParams } from "next/navigation";
 import { useToggle } from "react-use";
 
 import Button from "@/components/buttons";
+import {
+  HoverCard,
+  HoverCardContent,
+  HoverCardTrigger,
+} from "@/components/ui/hover-card";
 import { BlogEntry } from "@prisma/client";
 
 import { deleteArticle } from "../actions";
@@ -108,7 +113,16 @@ const SidebarMenuLi = ({
             <TrashIcon className="w-4 h-4 text-red-600" />
           </Button>
         )}
-        <Link href={link}>{label}</Link>
+        <HoverCard>
+          <HoverCardTrigger className="max-w-sm" asChild>
+            <Link href={link} className="line-clamp-2">
+              {label}
+            </Link>
+          </HoverCardTrigger>
+          <HoverCardContent className="w-fit" side="right">
+            {label}
+          </HoverCardContent>
+        </HoverCard>
       </li>
     </>
   );

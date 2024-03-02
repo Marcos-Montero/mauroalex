@@ -14,7 +14,6 @@ export const PubliWrapper = ({ children }: PropsWithChildren) => {
         {children}
         {!isOpen && <PubliRight />}
       </div>
-      <PubliBottom />
     </div>
   );
 };
@@ -23,11 +22,8 @@ export const PubliTop = () => {
   return <div className="w-full h-32"></div>;
 };
 export const PubliLeft = () => {
-  return <div className="hidden lg:block lg:w-[25%] h-full "></div>;
+  return <div className="hidden lg:block lg:w-[15%] h-full "></div>;
 };
 export const PubliRight = () => {
-  return <div className="hidden lg:block lg:w-[25%] h-full "></div>;
-};
-export const PubliBottom = () => {
-  return <div className=" w-full h-64" />;
+  return <div className="hidden lg:block lg:w-[15%] h-full "></div>;
 };

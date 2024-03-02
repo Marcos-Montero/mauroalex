@@ -9,7 +9,6 @@ import Button, { LogButton } from "@/components/buttons";
 import HanmaIcon from "@/components/hanma-icon";
 import { cn } from "@/lib/utils";
 
-import { Rubik_Mono_One } from "../fonts";
 import { NewBlogButton } from "./new-blog-button";
 
 export const Nav = () => {
@@ -69,14 +68,13 @@ export const Nav = () => {
           <div className="flex gap-4 self-end ">
             <Button
               className={cn(
-                "flex gap-2 tracking-tighter rounded-md before:ease relative overflow-hidden bg-gradient-to-r from-orange-400 to-orange-500 text-white shadow-2xl transition-all before:absolute before:-right-32 before:-top-12 before:h-32 before:w-32 before:translate-x-12 before:rotate-6 before:bg-white before:opacity-20 before:duration-700 hover:before:-translate-x-96 hover:brightness-125 before:blur-sm px-4 items-center",
-                Rubik_Mono_One.className
+                "flex gap-2 tracking-tighter rounded-md before:ease relative overflow-hidden bg-gradient-to-r from-orange-400 to-orange-500 text-white shadow-2xl transition-all before:absolute before:-right-32 before:-top-12 before:h-32 before:w-32 before:translate-x-12 before:rotate-6 before:bg-white before:opacity-20 before:duration-700 hover:before:-translate-x-96 hover:brightness-125 before:blur-sm px-4 items-center"
               )}
               asChild
             >
               <Link href="/club">
                 <HanmaIcon />
-                <p className="hidden md:block">THE CLUB</p>
+                <p className="hidden md:block font-bold">THE CLUB</p>
               </Link>
             </Button>
 
