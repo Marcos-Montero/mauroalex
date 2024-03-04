@@ -4,6 +4,7 @@ import { useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
 import { Editor } from "novel";
 import { useToggle } from "react-use";
+import { toast } from "sonner";
 
 import { ConfirmationModal } from "@/app/components/confirmation-modal";
 import { Editor as EditorType, mergeAttributes } from "@tiptap/core";
@@ -27,8 +28,8 @@ export const BlogEditor = () => {
   const [content, setContent] = useState<string | undefined>();
   const [isOpen, toggleOpen] = useToggle(false);
   const [isPending, startTransition] = useTransition();
+  const router = useRouter();
 
-  const { replace } = useRouter();
   const htmlContent = useEditor({
     editable: false,
     content: "<h1></h1><p></p>",
@@ -80,6 +81,7 @@ export const BlogEditor = () => {
   const onType = (editor?: EditorType) => {
     if (!htmlContent || !editor) return;
     htmlContent?.commands.setContent(editor.getHTML() as Content);
+    console.log({ content: htmlContent?.getJSON().content });
     setTitle(htmlContent?.getJSON().content?.[0]?.content?.[0]?.text);
     setContent(htmlContent?.getHTML());
   };
@@ -102,9 +104,19 @@ export const BlogEditor = () => {
     <>
       <ConfirmationModal
         isOpen={isOpen}
-        cancel={toggleOpen}
+        cancel={() => toggleOpen(false)}
         question="Save and create the article ?"
-        action={() => handleCreate({ title, content })}
+        action={() => {
+          handleCreate({ title, content });
+          toast(
+            <>
+              <span className="font-bold text-xl">
+                La entrada de blog ha sido creada corectamente.
+              </span>
+            </>
+          );
+          router.push("/");
+        }}
       />
       <Editor
         className="bg-black/40 border border-white rounded-xl min-h-64 max-h-full overflow-y-scroll"
@@ -115,10 +127,12 @@ export const BlogEditor = () => {
 
       <button
         type="submit"
-        className="fixed bottom-6 right-6 outline outline-orange-400 rounded-md p-2"
-        onClick={toggleOpen}
+        className="font-bold fixed top-16 right-6 outline outline-orange-400 bg-black rounded-md p-2"
+        onClick={() => {
+          toggleOpen(true);
+        }}
       >
-        Save
+        Save Blog entry
       </button>
     </>
   );

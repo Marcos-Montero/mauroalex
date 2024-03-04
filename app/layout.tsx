@@ -6,6 +6,8 @@ import { YoutubeIcon } from "lucide-react";
 import type { Metadata } from "next";
 import Link from "next/link";
 
+import { Toaster } from "@/components/ui/sonner";
+
 import { Nav } from "./components/nav";
 import { inter } from "./fonts";
 
@@ -44,6 +46,7 @@ export default function RootLayout({
         </Suspense>
         {children}
         <Footer />
+        <Toaster />
       </body>
       <script
         async
